@@ -13,16 +13,19 @@ public class BookMyStayApp {
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("Welcome to the Hotel Booking Management System");
-            System.out.print("Enter room type to search: ");
-            String searchRoom = scanner.nextLine();
 
-            if (roomInventory.containsKey(searchRoom)) {
-                int available = roomInventory.get(searchRoom);
+            System.out.print("Enter room type to book: ");
+            String roomType = scanner.nextLine();
+
+            if (roomInventory.containsKey(roomType)) {
+                int available = roomInventory.get(roomType);
 
                 if (available > 0) {
-                    System.out.println(searchRoom + " is available. Rooms left: " + available);
+                    roomInventory.put(roomType, available - 1);
+                    System.out.println("Booking confirmed for " + roomType);
+                    System.out.println("Remaining rooms: " + roomInventory.get(roomType));
                 } else {
-                    System.out.println(searchRoom + " is currently not available.");
+                    System.out.println("Sorry, " + roomType + " is fully booked.");
                 }
             } else {
                 System.out.println("Invalid room type.");
@@ -31,3 +34,4 @@ public class BookMyStayApp {
             scanner.close();
         }
     }
+
